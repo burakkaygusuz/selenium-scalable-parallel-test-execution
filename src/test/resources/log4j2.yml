@@ -1,0 +1,35 @@
+Configuration:
+  status: warn
+
+  appenders:
+    Console:
+      name: LogToConsole
+      PatternLayout:
+        DisableAnsi: false
+        Pattern: "%style{%c{1} | %d{yyyy-MM-dd HH:mm:ss}}{blue} %highlight{[%-5level]}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} %msg%n"
+
+    RollingFile:
+      - name: LogToRollingFile
+        fileName: logs/selenium_scalable_parallel_test_execution.log
+        filePattern: "logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz"
+        PatternLayout:
+          pattern: "[%-5level] %d{yyyy-MM-dd | HH:mm:ss} | %c{1} | %msg%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 10MB
+        DefaultRollOverStrategy:
+          max: 10
+
+  Loggers:
+    logger:
+      - name: io.github.burakkaygusuz
+        level: debug
+        additivity: false
+        AppenderRef:
+          - ref: LogToConsole
+          - ref: LogToRollingFile
+
+    Root:
+      level: error
+      AppenderRef:
+        ref: LogToConsole

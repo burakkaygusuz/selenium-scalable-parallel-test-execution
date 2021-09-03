@@ -1,0 +1,15 @@
+#Intellj Idea
+.idea
+bin
+.DS_Store
+target
+
+# VSCode
+.vscode
+.settings
+.classpath
+.project
+
+#Project
+logs
+.log
