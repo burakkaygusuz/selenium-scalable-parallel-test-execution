@@ -25,6 +25,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <!--Dependency Versions-->
         <assertj-core.version>3.20.2</assertj-core.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
         <fasterxml.jackson-version>2.13.0-rc2</fasterxml.jackson-version>
         <junit-jupiter.version>5.8.0-RC1</junit-jupiter.version>
         <selenium.version>4.0.0-rc-1</selenium.version>
@@ -91,6 +92,11 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${fasterxml.jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 
