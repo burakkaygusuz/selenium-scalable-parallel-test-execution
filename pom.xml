@@ -120,6 +120,7 @@
                         </properties>
                         <systemPropertyVariables>
                             <browser>chrome</browser>
+                            <headless>false</headless>
                         </systemPropertyVariables>
                     </configuration>
                     <dependencies>
