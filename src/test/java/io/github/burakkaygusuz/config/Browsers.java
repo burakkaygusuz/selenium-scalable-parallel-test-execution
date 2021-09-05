@@ -97,9 +97,10 @@ public enum Browsers {
         return super.toString();
     }
 
-    public final static boolean HEADLESS = Boolean.getBoolean("headless");
+    private final static boolean HEADLESS = Boolean.getBoolean("headless");
 
     protected abstract RemoteWebDriver createDriver(String spec) throws MalformedURLException;
 
     protected abstract AbstractDriverOptions<?> getOptions();
+
 }
