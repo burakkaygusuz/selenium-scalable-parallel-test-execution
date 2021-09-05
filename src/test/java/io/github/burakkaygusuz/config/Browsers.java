@@ -92,6 +92,10 @@ public enum Browsers {
         }
     };
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 
     public final static boolean HEADLESS = Boolean.getBoolean("headless");
 
