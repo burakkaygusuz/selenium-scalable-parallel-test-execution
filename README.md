@@ -36,3 +36,18 @@ $ minikube service selenium-router-deployment --url
 ## To access the dashboard
 $ minikube dashboard
 ```
+
+## Commands
+
+After deploying the Selenium Grid using the .yaml file inside the project,
+execute the test with the following command:
+
+```
+mvn clean test -Dbrowser='browserName'
+```
+
+You can specify which browser to use by using one of the following
+on the command line:
+
+- ```-Dbrowser=CHROME```
+- ```-Dbrowser=FIREFOX```
