@@ -18,7 +18,7 @@ public class DriverFactory {
 
     public DriverFactory() {
         Browsers defaultBrowser = Browsers.CHROME;
-        String browser = System.getProperty("browser", defaultBrowser.toString());
+        String browser = System.getProperty("browser", defaultBrowser.toString()).toUpperCase();
 
         try {
             defaultBrowser = Browsers.valueOf(browser);
