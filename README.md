@@ -49,5 +49,5 @@ mvn clean test -Dbrowser='browserName'
 You can specify which browser to use by using one of the following
 on the command line:
 
-- ```-Dbrowser=CHROME```
-- ```-Dbrowser=FIREFOX```
+- `-Dbrowser=chrome`
+- `-Dbrowser=firefox`
