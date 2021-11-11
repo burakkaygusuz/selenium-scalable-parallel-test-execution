@@ -28,7 +28,7 @@ public class DriverFactory {
         this.selectedBrowser = defaultBrowser;
     }
 
-    public RemoteWebDriver createInstance() {
+    public synchronized RemoteWebDriver createInstance() {
         try {
             driverThreadLocal.set(selectedBrowser.createDriver(getRemoteAddress()));
         } catch (MalformedURLException e) {
