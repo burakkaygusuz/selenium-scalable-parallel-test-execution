@@ -8,7 +8,7 @@ Scalable parallel automated tests with Kubernetes cluster, Docker containers and
 
 ## Requirements
 
-- This project requires [Java 11 JDK](https://adoptopenjdk.net/).
+- This project requires [Java 17 JDK](https://adoptium.net/).
 - Install [Docker](https://docs.docker.com/engine/install) engine.
 - Install [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
 - Install [Minikube](https://kubernetes.io/docs/tasks/tools/#minikube) to run Kubernetes as locally.
