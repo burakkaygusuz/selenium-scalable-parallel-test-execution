@@ -2,7 +2,7 @@ package io.github.burakkaygusuz.config;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class DriverFactory {
 
-    private static final Logger LOGGER = LogManager.getLogger(DriverFactory.class.getName());
+    private static final Logger LOGGER = (Logger) LogManager.getLogger(DriverFactory.class.getName());
     private final ThreadLocal<RemoteWebDriver> driverThreadLocal = new ThreadLocal<>();
     private final Browsers selectedBrowser;
 

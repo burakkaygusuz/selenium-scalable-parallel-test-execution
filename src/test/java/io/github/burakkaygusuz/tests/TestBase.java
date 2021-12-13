@@ -2,7 +2,7 @@ package io.github.burakkaygusuz.tests;
 
 import io.github.burakkaygusuz.config.DriverFactory;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.Logger;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,7 +12,7 @@ import java.time.Duration;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestBase {
 
-    private static final Logger LOGGER = LogManager.getLogger(TestBase.class.getName());
+    private static final Logger LOGGER = (Logger) LogManager.getLogger(TestBase.class.getName());
     protected RemoteWebDriver driver;
     protected WebDriverWait wait;
 
