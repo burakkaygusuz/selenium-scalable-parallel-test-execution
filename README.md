@@ -17,7 +17,7 @@ Scalable parallel automated tests with Kubernetes cluster, Docker containers and
 
 ```shell
 # Start minikube with configured driver, CPU & memory
-$ minikube start --driver=docker --cpus 4 --memory 8192
+$ minikube start --driver=docker --cpus 2 --memory 4096
 
 # Deploy all the grid components to kubernetes
 $ kubectl apply -f deploy.yml
