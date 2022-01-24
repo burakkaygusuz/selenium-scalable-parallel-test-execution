@@ -17,7 +17,7 @@ public class TestBase {
     protected WebDriverWait wait;
 
     @BeforeAll
-    public synchronized void setUp() {
+    public void setUp() {
         driver = new DriverFactory().createInstance();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -40,7 +40,7 @@ public class TestBase {
     }
 
     @AfterAll
-    public synchronized void tearDown() {
+    public void tearDown() {
         if (driver != null)
             driver.quit();
         driver = null;
