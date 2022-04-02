@@ -71,13 +71,13 @@ public enum Browsers {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             FirefoxProfile firefoxProfile = new FirefoxProfile();
 
-            firefoxProfile.setPreference(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, true);
             firefoxProfile.setAcceptUntrustedCertificates(true);
             firefoxProfile.setAssumeUntrustedCertificateIssuer(true);
 
             LoggingPreferences firefoxLogPrefs = new LoggingPreferences();
             firefoxLogPrefs.enable(LogType.PERFORMANCE, Level.OFF);
 
+            firefoxOptions.setCapability(FirefoxDriver.Capability.MARIONETTE, true);
             firefoxOptions.setCapability(CapabilityType.LOGGING_PREFS, firefoxLogPrefs);
             firefoxOptions.setCapability(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
             firefoxOptions.setLogLevel(FirefoxDriverLogLevel.ERROR);
