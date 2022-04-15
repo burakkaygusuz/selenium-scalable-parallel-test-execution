@@ -15,11 +15,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public enum Browsers {
 
@@ -31,28 +28,28 @@ public enum Browsers {
 
         @Override
         protected ChromeOptions getOptions() {
-            Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
-
             Map<String, Object> prefs = new HashMap<>();
             prefs.put("profile.default_content_setting_values.notifications", 2);
             prefs.put("profile.managed_default_content_settings.javascript", 1);
             prefs.put("credentials_enable_service", false);
             prefs.put("profile.password_manager_enabled", false);
 
-            LoggingPreferences chromeLogPrefs = new LoggingPreferences();
-            chromeLogPrefs.enable(LogType.PERFORMANCE, Level.OFF);
+            final LoggingPreferences chromeLogPrefs = new LoggingPreferences();
+            chromeLogPrefs.enable(LogType.PERFORMANCE, Level.SEVERE);
 
-            ChromeOptions chromeOptions = new ChromeOptions();
+            final ChromeOptions chromeOptions = new ChromeOptions();
 
             chromeOptions.setCapability(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
             chromeOptions.setCapability(ChromeDriverService.CHROME_DRIVER_VERBOSE_LOG_PROPERTY, "true");
             chromeOptions.setCapability(CapabilityType.LOGGING_PREFS, chromeLogPrefs);
-            chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-            chromeOptions.addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage");
-            chromeOptions.setAcceptInsecureCerts(true);
-            chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-            chromeOptions.setHeadless(HEADLESS);
-            chromeOptions.setExperimentalOption("prefs", prefs);
+
+            chromeOptions.setLogLevel(ChromeDriverLogLevel.SEVERE)
+                    .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
+                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
+                    .setAcceptInsecureCerts(true)
+                    .setPageLoadStrategy(PageLoadStrategy.NORMAL)
+                    .setHeadless(HEADLESS)
+                    .setExperimentalOption("prefs", prefs);
 
             return chromeOptions;
         }
@@ -66,27 +63,27 @@ public enum Browsers {
 
         @Override
         protected FirefoxOptions getOptions() {
-            Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
-
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            FirefoxProfile firefoxProfile = new FirefoxProfile();
+            final FirefoxOptions firefoxOptions = new FirefoxOptions();
+            final FirefoxProfile firefoxProfile = new FirefoxProfile();
 
             firefoxProfile.setAcceptUntrustedCertificates(true);
             firefoxProfile.setAssumeUntrustedCertificateIssuer(true);
 
-            LoggingPreferences firefoxLogPrefs = new LoggingPreferences();
-            firefoxLogPrefs.enable(LogType.PERFORMANCE, Level.OFF);
+            final LoggingPreferences firefoxLogPrefs = new LoggingPreferences();
+            firefoxLogPrefs.enable(LogType.PERFORMANCE, Level.SEVERE);
 
             firefoxOptions.setCapability(FirefoxDriver.Capability.MARIONETTE, true);
             firefoxOptions.setCapability(CapabilityType.LOGGING_PREFS, firefoxLogPrefs);
             firefoxOptions.setCapability(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
-            firefoxOptions.setLogLevel(FirefoxDriverLogLevel.ERROR);
-            firefoxOptions.setProfile(firefoxProfile);
-            firefoxOptions.addPreference("dom.webnotifications.enabled", false);
-            firefoxOptions.addPreference("gfx.direct2d.disabled", true);
-            firefoxOptions.addPreference("layers.acceleration.force-enabled", true);
-            firefoxOptions.addPreference("javascript.enabled", true);
-            firefoxOptions.setHeadless(HEADLESS);
+
+            firefoxOptions.setLogLevel(FirefoxDriverLogLevel.WARN)
+                    .addPreference("dom.webnotifications.enabled", false)
+                    .addPreference("gfx.direct2d.disabled", true)
+                    .addPreference("layers.acceleration.force-enabled", true)
+                    .addPreference("javascript.enabled", true)
+                    .setPageLoadStrategy(PageLoadStrategy.NORMAL)
+                    .setHeadless(HEADLESS)
+                    .setProfile(firefoxProfile);
 
             return firefoxOptions;
         }
