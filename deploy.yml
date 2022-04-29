@@ -55,6 +55,10 @@ spec:
               protocol: TCP
             - containerPort: 5557
               protocol: TCP
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
 ---
 #Sessions Map
 apiVersion: v1
@@ -107,6 +111,10 @@ spec:
           ports:
             - containerPort: 5556
               protocol: TCP
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
 ---
 #Session Queue
 apiVersion: v1
@@ -158,6 +166,10 @@ spec:
           ports:
             - containerPort: 5556
               protocol: TCP
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
 ---
 #Distributor
 apiVersion: v1
@@ -218,6 +230,11 @@ spec:
           ports:
             - containerPort: 5553
               protocol: TCP
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
 ---
 #Router
 apiVersion: v1
@@ -276,6 +293,10 @@ spec:
           ports:
             - containerPort: 4444
               protocol: TCP
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
 ---
 #Chrome Node
 apiVersion: v1
@@ -332,12 +353,9 @@ spec:
             - name: dshm
               mountPath: /dev/shm
           resources:
-            requests:
-              memory: "1Gi"
-              cpu: "1"
             limits:
-              memory: "1Gi"
-              cpu: "1"
+              memory: "256Mi"
+              cpu: "0.2"
       volumes:
         - name: dshm
           emptyDir: { "medium": "Memory" }
@@ -397,12 +415,9 @@ spec:
             - name: dshm
               mountPath: /dev/shm
           resources:
-            requests:
-              memory: "1Gi"
-              cpu: "1"
             limits:
-              memory: "1Gi"
-              cpu: "1"
+              memory: "256Mi"
+              cpu: "0.2"
       volumes:
         - name: dshm
           emptyDir: { "medium": "Memory" }
