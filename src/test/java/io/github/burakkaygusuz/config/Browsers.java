@@ -1,6 +1,9 @@
 package io.github.burakkaygusuz.config;
 
+import io.kubernetes.client.openapi.models.V1Service;
+import io.kubernetes.client.openapi.models.V1ServiceBuilder;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.chrome.ChromeDriverLogLevel;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,6 +16,8 @@ import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -22,8 +27,8 @@ public enum Browsers {
 
     CHROME {
         @Override
-        protected RemoteWebDriver createDriver(String spec) throws MalformedURLException {
-            return new RemoteWebDriver(new URL(spec), getOptions());
+        protected RemoteWebDriver createDriver() throws MalformedURLException {
+            return new RemoteWebDriver(getRemoteAddress(), getOptions());
         }
 
         @Override
@@ -57,8 +62,8 @@ public enum Browsers {
 
     FIREFOX {
         @Override
-        protected RemoteWebDriver createDriver(String spec) throws MalformedURLException {
-            return new RemoteWebDriver(new URL(spec), getOptions());
+        protected RemoteWebDriver createDriver() throws MalformedURLException {
+            return new RemoteWebDriver(getRemoteAddress(), getOptions());
         }
 
         @Override
@@ -96,8 +101,21 @@ public enum Browsers {
 
     private final static boolean HEADLESS = Boolean.getBoolean("headless");
 
-    protected abstract RemoteWebDriver createDriver(String spec) throws MalformedURLException;
+    protected abstract RemoteWebDriver createDriver() throws MalformedURLException;
 
     protected abstract AbstractDriverOptions<?> getOptions();
 
+    private static URL getRemoteAddress() throws MalformedURLException {
+        String remoteAddress;
+        try {
+            InputStream stream = Runtime.getRuntime().exec("minikube service --url selenium-router-deployment").getInputStream();
+            try (Scanner scanner = new Scanner(stream).useDelimiter("\\A")) {
+                remoteAddress = scanner.hasNext() ? scanner.next() : null;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new URL(Objects.requireNonNull(remoteAddress));
+    }
 }
