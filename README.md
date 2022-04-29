@@ -4,20 +4,22 @@
 ![Kubernetes](https://img.shields.io/github/v/release/kubernetes/kubernetes?color=%23326ce5&label=kubernetes&logo=kubernetes&style=for-the-badge)
 ![Docker Engine](https://img.shields.io/github/v/release/docker/docker?color=0db7ed&label=docker&logo=docker&style=for-the-badge)
 
-Scalable parallel automated tests with Kubernetes cluster, Docker containers and Selenium
+Scalable parallel automated tests with Kubernetes cluster, Docker containers and Selenium 4
 
-## Requirements
+## Prerequisites
 
-- This project requires [Java 17 JDK](https://adoptium.net/).
-- Install [Docker](https://docs.docker.com/engine/install) engine.
-- Install [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-- Install [Minikube](https://kubernetes.io/docs/tasks/tools/#minikube) to run Kubernetes as locally.
+Make sure you have installed and be configured the environment variables all the following prerequisites on your development machine:
+
+| OS      | JDK                                | Maven                 | Docker                 | Kubernetes                    | Minikube                 |
+|---------|------------------------------------|-----------------------|------------------------|-------------------------------|--------------------------|
+| Windows | `scoop install java/temurin17-jdk` | `scoop install maven` | `scoop install docker` | `scoop install kubectl`       | `scoop install minikube` |
+| macOS   | `brew install --cask temurin`      | `brew install maven`  | `brew install docker`  | `brew install kubernetes-cli` | `brew install minikube`  |
 
 ### Deploying to Kubernetes
 
 ```shell
 # Start minikube with configured driver, CPU & memory
-$ minikube start --driver=docker --cpus 2 --memory 4096
+$ minikube start --driver=docker --cpus 4 --memory 4096
 
 # Deploy all the grid components to kubernetes
 $ kubectl apply -f deploy.yml
