@@ -33,7 +33,7 @@
         <lombok.version>1.18.24</lombok.version>
         <!--Plugin Versions-->
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     </properties>
 
     <dependencies>
