@@ -1,11 +1,8 @@
 package io.github.burakkaygusuz.config;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.net.MalformedURLException;
 
 public class DriverFactory {
 
@@ -25,13 +22,8 @@ public class DriverFactory {
         this.selectedBrowser = defaultBrowser;
     }
 
-    public synchronized RemoteWebDriver createInstance() {
-        try {
-            driverThreadLocal.set(selectedBrowser.createDriver());
-        } catch (MalformedURLException e) {
-            LOGGER.error(String.format("A malformed URL has occurred. No legal protocol could be found or string could not be parsed: \n %s",
-                    ExceptionUtils.getRootCause(e)));
-        }
+    public synchronized RemoteWebDriver getDriver() {
+        driverThreadLocal.set(selectedBrowser.createDriver());
         return driverThreadLocal.get();
     }
 }

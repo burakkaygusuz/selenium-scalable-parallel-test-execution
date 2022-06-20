@@ -18,7 +18,9 @@ public class TestBase {
 
     @BeforeAll
     public void setUp() {
-        driver = new DriverFactory().createInstance();
+        if (driver == null) {
+            driver = new DriverFactory().getDriver();
+        }
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
