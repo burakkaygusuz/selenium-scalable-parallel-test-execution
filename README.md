@@ -8,30 +8,33 @@ Scalable parallel automated tests with Kubernetes cluster, Docker containers and
 
 ## Prerequisites
 
-Make sure you have installed and be configured the environment variables all the following prerequisites on your development machine:
+Make sure you have installed and configured the environment variables all the following prerequisites on your
+development machine:
 
-| OS      | JDK                                | Maven                 | Docker                 | Kubernetes                    | Minikube                 |
-|---------|------------------------------------|-----------------------|------------------------|-------------------------------|--------------------------|
-| Windows | `scoop install java/temurin17-jdk` | `scoop install maven` | `scoop install docker` | `scoop install kubectl`       | `scoop install minikube` |
-| macOS   | `brew install --cask temurin`      | `brew install maven`  | `brew install docker`  | `brew install kubernetes-cli` | `brew install minikube`  |
+| OS      | JDK                                | Maven                 | Docker                                        | Kubernetes                    | Helm                 |
+|---------|------------------------------------|-----------------------|-----------------------------------------------|-------------------------------|----------------------|
+| Windows | `scoop install java/temurin17-jdk` | `scoop install maven` | `winget install -e --id Docker.DockerDesktop` | `scoop install kubectl`       | `scoop install helm` |
+| macOS   | `brew install --cask temurin`      | `brew install maven`  | `brew install docker`                         | `brew install kubernetes-cli` | `brew install helm`  |
 
 ### Deploying to Kubernetes
 
-```shell
-# Start minikube with configured driver, CPU & memory
-$ minikube start --driver=docker --cpus 4 --memory 4096
+- Add docker-selenium helm repository.
 
-# Deploy all the grid components to kubernetes
-$ kubectl apply -f deploy.yml
+```kubernetes helm
+   helm repo add docker-selenium https://www.selenium.dev/docker-selenium
+```
 
-# Expose the router
-$ kubectl expose deployment selenium-router-deployment --type=NodePort --port=4444
+- Install grid in the fully distributed mode (Router, Distributor, EventBus, SessionMap and SessionQueue components
+  separated).
 
-# Get the router URL to access the grid from outside K8s cluster
-$ minikube service selenium-router-deployment --url
+```kubernetes helm
+   helm install selenium-grid docker-selenium/selenium-grid --set isolateComponents=true
+```
 
-## To access the dashboard
-$ minikube dashboard
+- Upgrade helm chart if a new version released.
+
+```kubernetes helm
+   helm upgrade selenium-grid docker-selenium/selenium-grid
 ```
 
 ## Executing the Tests
