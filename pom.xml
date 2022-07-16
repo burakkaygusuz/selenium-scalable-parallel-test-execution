@@ -8,13 +8,6 @@
     <artifactId>selenium-scalable-parallel-test-execution</artifactId>
     <version>1.0</version>
 
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
     <name>Selenium Scalable Parallel Test Execution</name>
 
     <properties>
