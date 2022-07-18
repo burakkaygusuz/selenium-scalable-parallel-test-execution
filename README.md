@@ -49,3 +49,4 @@ You can specify which browser to use by using one of the following on the comman
 
 - `-Dbrowser=chrome`
 - `-Dbrowser=firefox`
+- `-Dbrowser=edge`

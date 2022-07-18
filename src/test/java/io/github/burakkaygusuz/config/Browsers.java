@@ -3,6 +3,7 @@ package io.github.burakkaygusuz.config;
 import lombok.SneakyThrows;
 import org.openqa.selenium.chrome.ChromeDriverLogLevel;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -69,6 +70,31 @@ public enum Browsers {
                     .setProfile(firefoxProfile);
 
             return firefoxOptions;
+        }
+    },
+
+    EDGE {
+        @Override
+        @SneakyThrows(MalformedURLException.class)
+        protected RemoteWebDriver createDriver() {
+            return new RemoteWebDriver(new URL("http://localhost:4444"), getOptions());
+        }
+
+        @Override
+        protected AbstractDriverOptions<?> getOptions() {
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("profile.default_content_setting_values.notifications", 2);
+            prefs.put("profile.managed_default_content_settings.javascript", 1);
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
+
+            final EdgeOptions edgeOptions = new EdgeOptions();
+            edgeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
+                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
+                    .setAcceptInsecureCerts(true)
+                    .setHeadless(HEADLESS)
+                    .setExperimentalOption("prefs", prefs);
+            return edgeOptions;
         }
     };
 
