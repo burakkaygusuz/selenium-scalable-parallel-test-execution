@@ -81,7 +81,7 @@ public enum Browsers {
         }
 
         @Override
-        protected AbstractDriverOptions<?> getOptions() {
+        protected EdgeOptions getOptions() {
             Map<String, Object> prefs = new HashMap<>();
             prefs.put("profile.default_content_setting_values.notifications", 2);
             prefs.put("profile.managed_default_content_settings.javascript", 1);
